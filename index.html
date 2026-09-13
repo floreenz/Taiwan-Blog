@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#d8d4c9" />
+    <title>Two Bodies / Taiwan</title>
+    <meta
+      name="description"
+      content="A spatial diary from an exchange in Tainan, Taiwan."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="archive-page">
+    <header class="site-header">
+      <a class="wordmark" href="./">TWO BODIES<br />TAIWAN</a>
+      <p class="header-note">A spatial diary<br />Tainan, 2026</p>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">Archive / 03 rooms</p>
+        <h1>Places are remembered<br />before they are understood.</h1>
+        <p class="intro-copy">
+          Each room is a scan, a fragment of time, and a way of listening.
+          Move slowly.
+        </p>
+      </section>
+
+      <section class="island" aria-labelledby="island-heading">
+        <div class="island-heading">
+          <p class="eyebrow" id="island-heading">The island</p>
+          <p>Three situations, held in place.</p>
+        </div>
+        <div class="map-frame">
+          <div class="map-lines" aria-hidden="true"></div>
+          <div id="map-pins" class="map-pins" aria-label="Scan rooms"></div>
+          <span class="north">N</span>
+          <span class="map-label label-sea">Taiwan Strait</span>
+          <span class="map-label label-city">Tainan</span>
+        </div>
+      </section>
+
+      <section class="room-list" aria-labelledby="rooms-heading">
+        <div class="section-heading">
+          <p class="eyebrow" id="rooms-heading">Rooms</p>
+          <p>Enter a scene.</p>
+        </div>
+        <div id="room-cards" class="room-cards"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Two students from Innsbruck, temporarily elsewhere.</p>
+      <p>Built as an expandable scan archive.</p>
+    </footer>
+
+    <script type="module" src="archive.js"></script>
+  </body>
+</html>
