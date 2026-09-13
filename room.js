@@ -3,16 +3,10 @@ const slug = new URLSearchParams(location.search).get("room");
 const room = rooms.find((entry) => entry.slug === slug) || rooms[0];
 
 document.title = `${room.title} — Two Bodies / Taiwan`;
-document.querySelector("#room-number").textContent = room.number;
-document.querySelector("#room-title").textContent = room.title;
-document.querySelector("#room-place").textContent = room.place;
-document.querySelector("#room-date").textContent = room.date;
-document.querySelector("#room-coordinates").textContent = room.coordinates;
-document.querySelector("#room-text").textContent = room.text;
 
 const canvas = document.querySelector("#scan-canvas");
 const context = canvas.getContext("2d");
-const status = document.querySelector("#scene-status");
+const maxRenderPoints = 60000;
 let points = proceduralPoints(room);
 let yaw = 0.45;
 let pitch = -0.08;
@@ -75,7 +69,7 @@ function render() {
     canvas.width = width;
     canvas.height = height;
   }
-  context.fillStyle = "#17211f";
+  context.fillStyle = "#000";
   context.fillRect(0, 0, width, height);
   const cosY = Math.cos(yaw), sinY = Math.sin(yaw);
   const cosP = Math.cos(pitch), sinP = Math.sin(pitch);
@@ -120,11 +114,10 @@ document.querySelector("#ply-upload").addEventListener("change", async (event) =
   const file = event.target.files[0];
   if (!file) return;
   try {
-    status.textContent = `Loading ${file.name}...`;
     points = await parsePly(await file.arrayBuffer());
-    status.textContent = `${points.length.toLocaleString()} points · ${file.name}`;
+    document.title = `${file.name} — Scan Room`;
   } catch (error) {
-    status.textContent = `Could not read ${file.name}: ${error.message}`;
+    window.alert(`Could not read ${file.name}: ${error.message}`);
   }
 });
 
@@ -152,7 +145,9 @@ async function parsePly(buffer) {
   }
   if (format === "ascii") {
     const rows = new TextDecoder().decode(bytes.subarray(headerEnd)).trim().split(/\r?\n/);
-    return rows.slice(0, vertexCount).map((row) => vertexFromValues(row.trim().split(/\s+/), properties));
+    return sampleVertices(vertexCount, (row) =>
+      vertexFromValues(rows[row].trim().split(/\s+/), properties)
+    );
   }
   if (format !== "binary_little_endian") throw new Error(`Unsupported PLY format: ${format}`);
   const sizes = { char: 1, uchar: 1, short: 2, ushort: 2, int: 4, uint: 4, float: 4, double: 8 };
@@ -160,7 +155,7 @@ async function parsePly(buffer) {
   const data = new DataView(buffer, headerEnd);
   if (data.byteLength < stride * vertexCount) throw new Error("PLY data ended before all vertices");
   const read = { char: "getInt8", uchar: "getUint8", short: "getInt16", ushort: "getUint16", int: "getInt32", uint: "getUint32", float: "getFloat32", double: "getFloat64" };
-  return Array.from({ length: vertexCount }, (_, row) => {
+  return sampleVertices(vertexCount, (row) => {
     let offset = row * stride;
     const values = properties.map((property) => {
       const value = data[read[property.type]](offset, true);
@@ -171,6 +166,15 @@ async function parsePly(buffer) {
   });
 }
 
+function sampleVertices(vertexCount, readVertex) {
+  const interval = Math.ceil(vertexCount / maxRenderPoints);
+  const sampled = [];
+  for (let row = 0; row < vertexCount; row += interval) {
+    sampled.push(readVertex(row));
+  }
+  return sampled;
+}
+
 function vertexFromValues(values, properties) {
   const get = (name, fallback) => {
     const index = properties.findIndex((property) => property.name === name);
@@ -179,24 +183,4 @@ function vertexFromValues(values, properties) {
   return { x: get("x", 0), y: get("y", 0), z: get("z", 0), r: get("red", 203), g: get("green", 225), b: get("blue", 211) };
 }
 
-let oscillator, gain;
-document.querySelector("#sound-toggle").addEventListener("click", (event) => {
-  if (oscillator) {
-    oscillator.stop();
-    oscillator = null;
-    event.currentTarget.textContent = "Start ambient tone";
-    return;
-  }
-  const audio = new AudioContext();
-  oscillator = audio.createOscillator();
-  gain = audio.createGain();
-  oscillator.type = "sine";
-  oscillator.frequency.value = 83;
-  gain.gain.value = .018;
-  oscillator.connect(gain).connect(audio.destination);
-  oscillator.start();
-  event.currentTarget.textContent = "Stop ambient tone";
-});
-
-status.textContent = "Prototype point cloud · drag to enter";
 render();

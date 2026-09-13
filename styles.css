@@ -42,15 +42,15 @@ a { color: inherit; }
   color: var(--acid);
 }
 
-.room-page { background: #17211f; color: #e9e6dc; }
+.room-page { background: #000; color: #fff; }
 .room-layout { min-height: 100svh; position: relative; }
 .scene-wrap { inset: 0; overflow: hidden; position: absolute; }
 #scan-canvas { cursor: grab; display: block; height: 100%; width: 100%; }
 #scan-canvas:active { cursor: grabbing; }
-.room-back, .scene-hint, .scan-upload {
-  background: rgba(23,33,31,.7);
-  border: 1px solid rgba(233,230,220,.52);
-  color: #e9e6dc;
+.room-back, .scan-upload {
+  background: #000;
+  border: 1px solid #fff;
+  color: #fff;
   font-size: 11px;
   letter-spacing: .05em;
   padding: 8px 10px;
@@ -59,21 +59,11 @@ a { color: inherit; }
   text-transform: uppercase;
   z-index: 2;
 }
-.room-back { left: 22px; top: 20px; }.scene-hint { bottom: 21px; left: 22px; }
+.room-back { left: 22px; top: 20px; }
 .scan-upload { bottom: 21px; right: 22px; cursor: pointer; }
 .scan-upload input { display: none; }
-.scene-status { background: rgba(23,33,31,.7); bottom: 55px; font-size: 11px; left: 22px; margin: 0; padding: 5px 8px; position: absolute; z-index: 2; }
-.room-meta { background: rgba(23,33,31,.84); border-left: 1px solid rgba(233,230,220,.52); display: flex; flex-direction: column; min-height: 100svh; padding: 24px; position: absolute; right: 0; top: 0; width: min(390px, 35vw); }
-.room-meta .eyebrow, .sound-note { color: rgba(233,230,220,.58); }
-.room-meta h1 { font-family: var(--serif); font-size: clamp(35px, 4vw, 58px); font-weight: 400; letter-spacing: -.05em; line-height: .86; margin: 16px 0 44px; }
-dl { border-top: 1px solid rgba(233,230,220,.35); margin: 0; }
-dl div { border-bottom: 1px solid rgba(233,230,220,.35); display: flex; justify-content: space-between; padding: 6px 0; }
-dt { color: rgba(233,230,220,.58); } dd { margin: 0; text-align: right; }
-.room-text { font-family: var(--serif); font-size: 21px; line-height: 1.08; margin: 42px 0 auto; }
-.sound-toggle { background: var(--acid); border: 0; color: #17211f; cursor: pointer; font: inherit; padding: 12px; text-align: left; }
-.sound-note { line-height: 1.4; margin: 11px 0 0; }
 
 @media (max-width: 700px) {
-  footer { gap: 18px; }.room-meta { background: linear-gradient(transparent, rgba(23,33,31,.97) 20%); border: 0; bottom: 0; min-height: 0; padding: 20px 16px; top: auto; width: 100%; }
-  .room-meta h1 { font-size: 40px; margin: 8px 0 15px; }.room-meta dl { display: none; }.room-text { display: none; }.sound-toggle { margin-top: 18px; }.scene-status { display: none; }.scene-hint { bottom: 76px; left: 16px; }.scan-upload { bottom: 16px; right: 16px; }.room-back { left: 16px; top: 16px; }
+  .scan-upload { bottom: 16px; right: 16px; }
+  .room-back { left: 16px; top: 16px; }
 }
