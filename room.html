@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1d2625" />
+    <title>Room — Two Bodies / Taiwan</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="room-page">
+    <main class="room-layout">
+      <a class="room-back" href="./" aria-label="Return to the archive">← Archive</a>
+
+      <section class="scene-wrap" aria-label="Interactive 3D scan">
+        <canvas id="scan-canvas"></canvas>
+        <p id="scene-status" class="scene-status">Loading room...</p>
+        <div class="scene-hint">Drag to look · scroll to move</div>
+        <label class="scan-upload" for="ply-upload">
+          <span>Try your PLY scan</span>
+          <input id="ply-upload" type="file" accept=".ply" />
+        </label>
+      </section>
+
+      <aside class="room-meta">
+        <p class="eyebrow" id="room-number"></p>
+        <h1 id="room-title"></h1>
+        <dl>
+          <div><dt>Place</dt><dd id="room-place"></dd></div>
+          <div><dt>Time</dt><dd id="room-date"></dd></div>
+          <div><dt>Coordinates</dt><dd id="room-coordinates"></dd></div>
+        </dl>
+        <p id="room-text" class="room-text"></p>
+        <button id="sound-toggle" class="sound-toggle" type="button">
+          Start ambient tone
+        </button>
+        <p class="sound-note">Replace this sketch with a recorded voiceover when publishing.</p>
+      </aside>
+    </main>
+    <script type="module" src="room.js"></script>
+  </body>
+</html>

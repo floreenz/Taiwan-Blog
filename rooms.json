@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "market-stair",
+    "number": "Room 01",
+    "title": "The stair beside the market",
+    "place": "Yongle Market, Tainan",
+    "date": "04 October 2026",
+    "coordinates": "22.9963° N, 120.1966° E",
+    "text": "The tile is always wet here. The stairs lead nowhere in particular, except upward through steam and plastic tarpaulin.",
+    "color": "#a8bfa9",
+    "pin": [61, 47],
+    "seed": 12,
+    "shape": "stairs"
+  },
+  {
+    "slug": "rooftop-after-rain",
+    "number": "Room 02",
+    "title": "Rooftop after rain",
+    "place": "West Central District, Tainan",
+    "date": "19 October 2026",
+    "coordinates": "22.9938° N, 120.1902° E",
+    "text": "Water makes another plan of the city. Antennas, shoes, tanks, and a borrowed horizon are held together for a moment.",
+    "color": "#667f9a",
+    "pin": [42, 64],
+    "seed": 27,
+    "shape": "roof"
+  },
+  {
+    "slug": "unfinished-courtyard",
+    "number": "Room 03",
+    "title": "Unfinished courtyard",
+    "place": "Anping, Tainan",
+    "date": "02 November 2026",
+    "coordinates": "22.9995° N, 120.1581° E",
+    "text": "A room opens onto another room. Rebar marks the sky with a structure that is neither ruin nor promise.",
+    "color": "#b79e75",
+    "pin": [21, 40],
+    "seed": 43,
+    "shape": "courtyard"
+  }
+]
